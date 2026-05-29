@@ -5,6 +5,27 @@ import { Link } from 'react-router'
 
 export default function Createnewpost() {
 
+  const [formData, setFormData] = useState({
+    title: '',
+    author: '',
+    category: '',
+    status: '',
+    publishDate: '',
+    content: '',
+    featuredImage: ''
+  });
+
+  const handleSubmit = () => {
+    console.log('Form Data:', formData);
+  }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }));
+  };
+
   const [sidebar, setSidebar] = useState(false)
 
   return (
@@ -54,7 +75,7 @@ export default function Createnewpost() {
               <h4>Post Details</h4>
             </div>
 
-            <form>
+            <form id="post-form" onSubmit={handleSubmit}>
 
               <div className="row">
 
@@ -67,6 +88,9 @@ export default function Createnewpost() {
 
                   <input
                     type="text"
+                    name="title"
+                    value={formData.title}
+                    onChange={handleChange}
                     className="form-control"
                     placeholder="Enter post title"
                   />
@@ -82,6 +106,9 @@ export default function Createnewpost() {
 
                   <input
                     type="text"
+                    name="author"
+                    value={formData.author}
+                    onChange={handleChange}
                     className="form-control"
                     placeholder="Enter author name"
                   />
@@ -95,7 +122,7 @@ export default function Createnewpost() {
                     Category
                   </label>
 
-                  <select className="form-control">
+                  <select className="form-control" name="category" value={formData.category} onChange={handleChange}>
 
                     <option value="">
                       Select Category
@@ -117,7 +144,7 @@ export default function Createnewpost() {
                     Status
                   </label>
 
-                  <select className="form-control">
+                  <select className="form-control" name="status" value={formData.status} onChange={handleChange}>
 
                     <option value="">
                       Select Status
@@ -140,6 +167,9 @@ export default function Createnewpost() {
                   <input
                     type="date"
                     className="form-control"
+                    name="publishDate"
+                    value={formData.publishDate}
+                    onChange={handleChange}
                   />
 
                 </div>
@@ -154,6 +184,9 @@ export default function Createnewpost() {
                   <textarea
                     rows="8"
                     className="form-control"
+                    name="content"
+                    value={formData.content}
+                    onChange={handleChange}
                     placeholder="Write your post content..."
                   ></textarea>
 
@@ -169,6 +202,9 @@ export default function Createnewpost() {
                   <input
                     type="file"
                     className="form-control"
+                    name="featuredImage"
+                    value={formData.featuredImage}
+                    onChange={handleChange}
                   />
 
                 </div>
